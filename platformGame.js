@@ -3,48 +3,13 @@
 
 // Player.prototype.size = new Vector2D(0.8, 1.5);
 
-class Lava {
-    constructor(pos, speed, reset) {
-        this.pos = pos;
-        this.speed = speed;
-        this.reset = reset;
-    }
 
-    get type() {
-        return "lava";
-    }
 
-    static create(pos, ch) {
-        if (ch == "=") {
-            return new Lava(pos, new Vector2D(2, 0));
-        } else if (ch == "|") {
-            return new Lava(pos, new Vector2D(0, 2));
-        } else if (ch == "v") {
-            return new Lava(pos, new Vector2D(0, 3), pos);
-        }
-    }
-}
+// Lava.prototype.size = new Vector2D(1, 1);
 
-Lava.prototype.size = new Vector2D(1, 1);
 
-class Coin {
-    constructor(pos, basePos, wobble) {
-        this.pos = pos;
-        this.basePos = basePos;
-        this.wobble = wobble;
-    }
 
-    get type() {
-        return "coin";
-    }
-
-    static create(pos) {
-        let basePos = pos.plus(new Vector2D(0.2, 0.1));
-        return new Coin(basePos, basePos, Math.random() * Math.PI * 2);
-    }
-}
-
-Coin.prototype.size = new Vector2D(0.6, 0.6);
+// Coin.prototype.size = new Vector2D(0.6, 0.6);
 
 const levelChars = {
     " ": "empty",
@@ -146,40 +111,40 @@ DOMDisplay.prototype.scrollPlayerIntoView = function (state) {
         this.dom.scrollTop = center.y + margin - height;
     }
 };
-Level.prototype.touches = function (pos, size, type) {
-    var xStart = Math.floor(pos.x);
-    var xEnd = Math.ceil(pos.x + size.x);
-    var yStart = Math.floor(pos.y);
-    var yEnd = Math.ceil(pos.y + size.y);
+// Level.prototype.touches = function (pos, size, type) {
+//     var xStart = Math.floor(pos.x);
+//     var xEnd = Math.ceil(pos.x + size.x);
+//     var yStart = Math.floor(pos.y);
+//     var yEnd = Math.ceil(pos.y + size.y);
 
-    for (var y = yStart; y < yEnd; y++) {
-        for (var x = xStart; x < xEnd; x++) {
-            let isOutside = x < 0 || x >= this.width || y < 0 || y >= this.height;
-            let here = isOutside ? "wall" : this.rows[y][x];
-            if (here == type) return true;
-        }
-    }
-    return false;
-};
+//     for (var y = yStart; y < yEnd; y++) {
+//         for (var x = xStart; x < xEnd; x++) {
+//             let isOutside = x < 0 || x >= this.width || y < 0 || y >= this.height;
+//             let here = isOutside ? "wall" : this.rows[y][x];
+//             if (here == type) return true;
+//         }
+//     }
+//     return false;
+// };
 
-State.prototype.update = function (time, keys) {
-    let actors = this.actors.map((actor) => actor.update(time, this, keys));
-    let newState = new State(this.level, actors, this.status);
+// State.prototype.update = function (time, keys) {
+//     let actors = this.actors.map((actor) => actor.update(time, this, keys));
+//     let newState = new State(this.level, actors, this.status);
 
-    if (newState.status != "playing") return newState;
+//     if (newState.status != "playing") return newState;
 
-    let player = newState.player;
-    if (this.level.touches(player.pos, player.size, "lava")) {
-        return new State(this.level, actors, "lost");
-    }
+//     let player = newState.player;
+//     if (this.level.touches(player.pos, player.size, "lava")) {
+//         return new State(this.level, actors, "lost");
+//     }
 
-    for (let actor of actors) {
-        if (actor != player && overlap(actor, player)) {
-            newState = actor.collide(newState);
-        }
-    }
-    return newState;
-};
+//     for (let actor of actors) {
+//         if (actor != player && overlap(actor, player)) {
+//             newState = actor.collide(newState);
+//         }
+//     }
+//     return newState;
+// };
 
 function overlap(actor1, actor2) {
     return (
@@ -190,40 +155,40 @@ function overlap(actor1, actor2) {
     );
 }
 
-Lava.prototype.collide = function (state) {
-    return new State(state.level, state.actors, "lost");
-};
+// Lava.prototype.collide = function (state) {
+//     return new State(state.level, state.actors, "lost");
+// };
 
-Coin.prototype.collide = function (state) {
-    let filtered = state.actors.filter((a) => a != this);
-    let status = state.status;
-    if (!filtered.some((a) => a.type == "coin")) status = "won";
-    return new State(state.level, filtered, status);
-};
+// Coin.prototype.collide = function (state) {
+//     let filtered = state.actors.filter((a) => a != this);
+//     let status = state.status;
+//     if (!filtered.some((a) => a.type == "coin")) status = "won";
+//     return new State(state.level, filtered, status);
+// };
 
-Lava.prototype.update = function (time, state) {
-    let newPos = this.pos.plus(this.speed.times(time));
-    if (!state.level.touches(newPos, this.size, "wall")) {
-        return new Lava(newPos, this.speed, this.reset);
-    } else if (this.reset) {
-        return new Lava(this.reset, this.speed, this.reset);
-    } else {
-        return new Lava(this.pos, this.speed.times(-1));
-    }
-};
+// Lava.prototype.update = function (time, state) {
+//     let newPos = this.pos.plus(this.speed.times(time));
+//     if (!state.level.touches(newPos, this.size, "wall")) {
+//         return new Lava(newPos, this.speed, this.reset);
+//     } else if (this.reset) {
+//         return new Lava(this.reset, this.speed, this.reset);
+//     } else {
+//         return new Lava(this.pos, this.speed.times(-1));
+//     }
+// };
 
 const wobbleSpeed = 8,
     wobbleDist = 0.07;
 
-Coin.prototype.update = function (time) {
-    let wobble = this.wobble + time * wobbleSpeed;
-    let wobblePos = Math.sin(wobble) * wobbleDist;
-    return new Coin(
-        this.basePos.plus(new Vector2D(0, wobblePos)),
-        this.basePos,
-        wobble
-    );
-};
+// Coin.prototype.update = function (time) {
+//     let wobble = this.wobble + time * wobbleSpeed;
+//     let wobblePos = Math.sin(wobble) * wobbleDist;
+//     return new Coin(
+//         this.basePos.plus(new Vector2D(0, wobblePos)),
+//         this.basePos,
+//         wobble
+//     );
+// };
 
 const playerXSpeed = 7;
 const gravity = 30;

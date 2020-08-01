@@ -13,4 +13,19 @@ class Level {
             });
         });
     }
+    touches(pos, size, type) {
+        var xStart = Math.floor(pos.x);
+        var xEnd = Math.ceil(pos.x + size.x);
+        var yStart = Math.floor(pos.y);
+        var yEnd = Math.ceil(pos.y + size.y);
+
+        for (var y = yStart; y < yEnd; y++) {
+            for (var x = xStart; x < xEnd; x++) {
+                let isOutside = x < 0 || x >= this.width || y < 0 || y >= this.height;
+                let here = isOutside ? "wall" : this.rows[y][x];
+                if (here == type) return true;
+            }
+        }
+        return false;
+    }
 }

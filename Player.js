@@ -2,7 +2,7 @@ class Player {
     constructor(pos, speed) {
         this.pos = pos;
         this.speed = speed;
-        this.size = new Vector2D(0.8, 1.5);
+        this.size = new Vector2D(0.5, 1.5);
     }
 
     get type() {
