@@ -1,74 +1,7 @@
-let simpleLevelPlan = `
-......................
-..#................#..
-..#..............=.#..
-..#.........o.o....#..
-..#.@......#####...#..
-..#####............#..
-......#++++++++++++#..
-......##############..
-......................`;
 
-class Level {
-    constructor(plan) {
-        let newPlan = [...plan];
-        this.height = newPlan.length;
-        this.width = newPlan[0].length;
-        this.startActors = [];
-        this.rows = newPlan.map((row, y) => {
-            return row.split('').map((ch, x) => {
-                let type = levelChars[ch];
-                if (typeof type == "string") return type;
-                this.startActors.push(type.create(new Vec(x, y), ch));
-                return "empty";
-            });
-        });
-    }
-}
 
-class State {
-    constructor(level, actors, status) {
-        this.level = level;
-        this.actors = actors;
-        this.status = status;
-    }
 
-    static start(level) {
-        return new State(level, level.startActors, "playing");
-    }
-
-    get player() {
-        return this.actors.find((a) => a.type == "player");
-    }
-}
-class Vec {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    plus(other) {
-        return new Vec(this.x + other.x, this.y + other.y);
-    }
-    times(factor) {
-        return new Vec(this.x * factor, this.y * factor);
-    }
-}
-class Player {
-    constructor(pos, speed) {
-        this.pos = pos;
-        this.speed = speed;
-    }
-
-    get type() {
-        return "player";
-    }
-
-    static create(pos) {
-        return new Player(pos.plus(new Vec(0, -0.5)), new Vec(0, 0));
-    }
-}
-
-Player.prototype.size = new Vec(0.8, 1.5);
+// Player.prototype.size = new Vector2D(0.8, 1.5);
 
 class Lava {
     constructor(pos, speed, reset) {
@@ -83,16 +16,16 @@ class Lava {
 
     static create(pos, ch) {
         if (ch == "=") {
-            return new Lava(pos, new Vec(2, 0));
+            return new Lava(pos, new Vector2D(2, 0));
         } else if (ch == "|") {
-            return new Lava(pos, new Vec(0, 2));
+            return new Lava(pos, new Vector2D(0, 2));
         } else if (ch == "v") {
-            return new Lava(pos, new Vec(0, 3), pos);
+            return new Lava(pos, new Vector2D(0, 3), pos);
         }
     }
 }
 
-Lava.prototype.size = new Vec(1, 1);
+Lava.prototype.size = new Vector2D(1, 1);
 
 class Coin {
     constructor(pos, basePos, wobble) {
@@ -106,12 +39,12 @@ class Coin {
     }
 
     static create(pos) {
-        let basePos = pos.plus(new Vec(0.2, 0.1));
+        let basePos = pos.plus(new Vector2D(0.2, 0.1));
         return new Coin(basePos, basePos, Math.random() * Math.PI * 2);
     }
 }
 
-    Coin.prototype.size = new Vec(0.6, 0.6);
+Coin.prototype.size = new Vector2D(0.6, 0.6);
 
 const levelChars = {
     " ": "empty",
@@ -286,7 +219,7 @@ Coin.prototype.update = function (time) {
     let wobble = this.wobble + time * wobbleSpeed;
     let wobblePos = Math.sin(wobble) * wobbleDist;
     return new Coin(
-        this.basePos.plus(new Vec(0, wobblePos)),
+        this.basePos.plus(new Vector2D(0, wobblePos)),
         this.basePos,
         wobble
     );
@@ -301,13 +234,13 @@ Player.prototype.update = function (time, state, keys) {
     if (keys.ArrowLeft) xSpeed -= playerXSpeed;
     if (keys.ArrowRight) xSpeed += playerXSpeed;
     let pos = this.pos;
-    let movedX = pos.plus(new Vec(xSpeed * time, 0));
+    let movedX = pos.plus(new Vector2D(xSpeed * time, 0));
     if (!state.level.touches(movedX, this.size, "wall")) {
         pos = movedX;
     }
 
     let ySpeed = this.speed.y + time * gravity;
-    let movedY = pos.plus(new Vec(0, ySpeed * time));
+    let movedY = pos.plus(new Vector2D(0, ySpeed * time));
     if (!state.level.touches(movedY, this.size, "wall")) {
         pos = movedY;
     } else if (keys.ArrowUp && ySpeed > 0) {
@@ -315,7 +248,7 @@ Player.prototype.update = function (time, state, keys) {
     } else {
         ySpeed = 0;
     }
-    return new Player(pos, new Vec(xSpeed, ySpeed));
+    return new Player(pos, new Vector2D(xSpeed, ySpeed));
 };
 
 function trackKeys(keys) {
