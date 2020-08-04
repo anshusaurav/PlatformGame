@@ -33,17 +33,17 @@ function elt(name, attrs, ...children) {
     return dom;
 }
 
-class DOMDisplay {
-    constructor(parent, level) {
-        this.dom = elt("div", { class: "game" }, drawGrid(level));
-        this.actorLayer = null;
-        parent.appendChild(this.dom);
-    }
+// class DOMDisplay {
+//     constructor(parent, level) {
+//         this.dom = elt("div", { class: "game" }, drawGrid(level));
+//         this.actorLayer = null;
+//         parent.appendChild(this.dom);
+//     }
 
-    clear() {
-        this.dom.remove();
-    }
-}
+//     clear() {
+//         this.dom.remove();
+//     }
+// }
 
 const scale = 20;
 
@@ -79,38 +79,38 @@ function drawActors(actors) {
     );
 }
 
-DOMDisplay.prototype.syncState = function (state) {
-    if (this.actorLayer) this.actorLayer.remove();
-    this.actorLayer = drawActors(state.actors);
-    this.dom.appendChild(this.actorLayer);
-    this.dom.className = `game ${state.status}`;
-    this.scrollPlayerIntoView(state);
-};
-DOMDisplay.prototype.scrollPlayerIntoView = function (state) {
-    let width = this.dom.clientWidth;
-    let height = this.dom.clientHeight;
-    let margin = width / 3;
+// DOMDisplay.prototype.syncState = function (state) {
+//     if (this.actorLayer) this.actorLayer.remove();
+//     this.actorLayer = drawActors(state.actors);
+//     this.dom.appendChild(this.actorLayer);
+//     this.dom.className = `game ${state.status}`;
+//     this.scrollPlayerIntoView(state);
+// };
+// DOMDisplay.prototype.scrollPlayerIntoView = function (state) {
+//     let width = this.dom.clientWidth;
+//     let height = this.dom.clientHeight;
+//     let margin = width / 3;
 
-    // The viewport
-    let left = this.dom.scrollLeft,
-        right = left + width;
-    let top = this.dom.scrollTop,
-        bottom = top + height;
+//     // The viewport
+//     let left = this.dom.scrollLeft,
+//         right = left + width;
+//     let top = this.dom.scrollTop,
+//         bottom = top + height;
 
-    let player = state.player;
-    let center = player.pos.plus(player.size.times(0.5)).times(scale);
+//     let player = state.player;
+//     let center = player.pos.plus(player.size.times(0.5)).times(scale);
 
-    if (center.x < left + margin) {
-        this.dom.scrollLeft = center.x - margin;
-    } else if (center.x > right - margin) {
-        this.dom.scrollLeft = center.x + margin - width;
-    }
-    if (center.y < top + margin) {
-        this.dom.scrollTop = center.y - margin;
-    } else if (center.y > bottom - margin) {
-        this.dom.scrollTop = center.y + margin - height;
-    }
-};
+//     if (center.x < left + margin) {
+//         this.dom.scrollLeft = center.x - margin;
+//     } else if (center.x > right - margin) {
+//         this.dom.scrollLeft = center.x + margin - width;
+//     }
+//     if (center.y < top + margin) {
+//         this.dom.scrollTop = center.y - margin;
+//     } else if (center.y > bottom - margin) {
+//         this.dom.scrollTop = center.y + margin - height;
+//     }
+// };
 // Level.prototype.touches = function (pos, size, type) {
 //     var xStart = Math.floor(pos.x);
 //     var xEnd = Math.ceil(pos.x + size.x);
@@ -190,31 +190,29 @@ const wobbleSpeed = 8,
 //     );
 // };
 
-const playerXSpeed = 7;
-const gravity = 30;
-const jumpSpeed = 17;
 
-Player.prototype.update = function (time, state, keys) {
-    let xSpeed = 0;
-    if (keys.ArrowLeft) xSpeed -= playerXSpeed;
-    if (keys.ArrowRight) xSpeed += playerXSpeed;
-    let pos = this.pos;
-    let movedX = pos.plus(new Vector2D(xSpeed * time, 0));
-    if (!state.level.touches(movedX, this.size, "wall")) {
-        pos = movedX;
-    }
 
-    let ySpeed = this.speed.y + time * gravity;
-    let movedY = pos.plus(new Vector2D(0, ySpeed * time));
-    if (!state.level.touches(movedY, this.size, "wall")) {
-        pos = movedY;
-    } else if (keys.ArrowUp && ySpeed > 0) {
-        ySpeed = -jumpSpeed;
-    } else {
-        ySpeed = 0;
-    }
-    return new Player(pos, new Vector2D(xSpeed, ySpeed));
-};
+// Player.prototype.update = function (time, state, keys) {
+//     let xSpeed = 0;
+//     if (keys.ArrowLeft) xSpeed -= playerXSpeed;
+//     if (keys.ArrowRight) xSpeed += playerXSpeed;
+//     let pos = this.pos;
+//     let movedX = pos.plus(new Vector2D(xSpeed * time, 0));
+//     if (!state.level.touches(movedX, this.size, "wall")) {
+//         pos = movedX;
+//     }
+
+//     let ySpeed = this.speed.y + time * gravity;
+//     let movedY = pos.plus(new Vector2D(0, ySpeed * time));
+//     if (!state.level.touches(movedY, this.size, "wall")) {
+//         pos = movedY;
+//     } else if (keys.ArrowUp && ySpeed > 0) {
+//         ySpeed = -jumpSpeed;
+//     } else {
+//         ySpeed = 0;
+//     }
+//     return new Player(pos, new Vector2D(xSpeed, ySpeed));
+// };
 
 function trackKeys(keys) {
     let down = Object.create(null);
