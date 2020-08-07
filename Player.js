@@ -10,7 +10,7 @@ class Player {
     }
 
     static create(pos) {
-        return new Player(pos.plus(new Vector2D(0, -0.5)), new Vector2D(0, 0));
+        return new Player(pos.plus(new Vector2D(0, -1.1)), new Vector2D(0, 0));
     }
 
     update(time, state, keys) {

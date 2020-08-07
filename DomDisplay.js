@@ -5,7 +5,6 @@ class DOMDisplay {
         parent.appendChild(this.dom);
     }
     drawGrid(level) {
-        const scale = 20;
         return elt(
             "table",
             {

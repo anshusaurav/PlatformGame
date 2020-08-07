@@ -9,6 +9,6 @@ const levelChars = {
     "|": Lava,
     v: Lava,
 };
-const scale = 20;
+const scale = 25;
 const wobbleSpeed = 8;
 const wobbleDist = 0.07;

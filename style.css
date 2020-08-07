@@ -3,10 +3,11 @@
   height: 97vh;
   justify-content: center;
   align-items: center;
-  background-color: yellowgreen;
+  background-color: rgba(0, 0, 0, 0.842);
 }
 .background {
   background-image: url("./images/sprite_background__super_mario_bros__by_sonicx64ds_dcrz5nh-pre.jpg");
+  background-size: contain;
   /* background: rgb(52, 166, 251); */
   table-layout: fixed;
   border-spacing: 0;
@@ -15,21 +16,36 @@
   padding: 0;
 }
 .lava {
-  background: rgb(255, 100, 100);
+  background: rgba(247, 49, 49, 0.922);
 }
 .wall {
-  background: rgb(80, 55, 19);
-  border
+  background: #381f13;
+  border: 1px solid rgb(19, 13, 4);
+  box-sizing: border-box;
 }
 .actor {
   position: absolute;
 }
 .coin {
-  background: rgb(241, 229, 89);
+  background: linear-gradient(
+    143deg,
+    rgb(187, 140, 0) 0%,
+    rgb(170, 145, 1) 48%,
+    rgb(146, 110, 1) 100%
+  );
   border-radius: 50%;
 }
+.coin:after {
+  content: "$";
+  font-size: 12px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .player {
-  background: rgb(64, 64, 64);
+  background: rgb(133, 129, 129);
+  box-sizing: border-box;
 }
 .lost .player {
   background: rgb(160, 64, 64);
@@ -39,22 +55,30 @@
 }
 .game {
   overflow: hidden;
-  max-width: 600px;
-  max-height: 450px;
+  width: 750px;
+  height: 550px;
   position: relative;
 }
 
 .score-tally {
   z-index: 100;
   position: fixed;
-  top: 80px;
-  left: 40%;
+  top: 40px;
+  left: 30%;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ff7373;
   white-space: nowrap;
+  font-family: "Raleway", sans-serif;
 }
 .level-tally {
   z-index: 100;
   position: fixed;
-  top: 80px;
-  left: 55%;
+  top: 40px;
+  left: 60%;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ff7373;
   white-space: nowrap;
+  font-family: "Raleway", sans-serif;
 }
