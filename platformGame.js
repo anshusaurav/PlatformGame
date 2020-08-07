@@ -1,14 +1,14 @@
 
-const levelChars = {
-    " ": "empty",
-    "x": "wall",
-    "!": "lava",
-    "@": Player,
-    o: Coin,
-    "=": Lava,
-    "|": Lava,
-    v: Lava,
-};
+// const levelChars = {
+//     " ": "empty",
+//     "x": "wall",
+//     "!": "lava",
+//     "@": Player,
+//     o: Coin,
+//     "=": Lava,
+//     "|": Lava,
+//     v: Lava,
+// };
 
 function elt(name, attrs, ...children) {
     let dom = document.createElement(name);
@@ -20,45 +20,9 @@ function elt(name, attrs, ...children) {
     }
     return dom;
 }
-const scale = 20;
+// const scale = 20;
 
-// function drawGrid(level) {
-//     return elt(
-//         "table",
-//         {
-//             class: "background",
-//             style: `width: ${level.width * scale}px`,
-//         },
-//         ...level.rows.map((row) =>
-//             elt(
-//                 "tr",
-//                 { style: `height: ${scale}px` },
-//                 ...row.map((type) => elt("td", { class: type }))
-//             )
-//         )
-//     );
-// }
 
-// function drawActors(actors) {
-//     return elt(
-//         "div",
-//         {},
-//         ...actors.map((actor) => {
-//             let rect = elt("div", { class: `actor ${actor.type}` });
-//             rect.style.width = `${actor.size.x * scale}px`;
-//             rect.style.height = `${actor.size.y * scale}px`;
-//             rect.style.left = `${actor.pos.x * scale}px`;
-//             rect.style.top = `${actor.pos.y * scale}px`;
-//             return rect;
-//         })
-//     );
-// }
-
-let playerSprites = document.createElement("img");
-playerSprites.src = "images/player.png";
-const playerXOverlap = 4;
-let otherSprites = document.createElement("img");
-otherSprites.src = "images/sprites.png";
 function overlap(actor1, actor2) {
     return (
         actor1.pos.x + actor1.size.x > actor2.pos.x &&
@@ -69,8 +33,8 @@ function overlap(actor1, actor2) {
 }
 
 
-const wobbleSpeed = 8,
-    wobbleDist = 0.07;
+// const wobbleSpeed = 8,
+//     wobbleDist = 0.07;
 
 
 function trackKeys(keys) {
@@ -101,6 +65,7 @@ function runAnimation(frameFunc) {
     requestAnimationFrame(frame);
 }
 function runLevel(level, Display) {
+    console.log('Coins in this level: ', level.numCoin);
     let display = new Display(document.querySelector('.game-container'), level);
     let state = State.start(level);
     let ending = 1;

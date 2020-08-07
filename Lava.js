@@ -3,6 +3,7 @@ class Lava {
         this.pos = pos;
         this.speed = speed;
         this.reset = reset;
+        this.lavaType = '';
         this.size = new Vector2D(1, 1);
     }
 
@@ -12,11 +13,11 @@ class Lava {
 
     static create(pos, ch) {
         if (ch == "=") {
-            return new Lava(pos, new Vector2D(2, 0));
+            return new Lava(pos, new Vector2D(2, 0), undefined, "Still");
         } else if (ch == "|") {
-            return new Lava(pos, new Vector2D(0, 2));
+            return new Lava(pos, new Vector2D(0, 2), undefined, "Moving");
         } else if (ch == "v") {
-            return new Lava(pos, new Vector2D(0, 3), pos);
+            return new Lava(pos, new Vector2D(0, 3), pos, "Moving");
         }
     }
     collide(state) {

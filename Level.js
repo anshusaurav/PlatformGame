@@ -4,9 +4,12 @@ class Level {
         this.height = newPlan.length;
         this.width = newPlan[0].length;
         this.startActors = [];
+        this.numCoin = 0;
         this.rows = newPlan.map((row, y) => {
             return row.split('').map((ch, x) => {
                 let type = levelChars[ch];
+                if (type instanceof Coin)
+                    this.numCoin++;
                 if (typeof type == "string") return type;
                 this.startActors.push(type.create(new Vector2D(x, y), ch));
                 return "empty";
