@@ -1,28 +1,22 @@
-
-// const levelChars = {
-//     " ": "empty",
-//     "x": "wall",
-//     "!": "lava",
-//     "@": Player,
-//     o: Coin,
-//     "=": Lava,
-//     "|": Lava,
-//     v: Lava,
-// };
-
 function elt(name, attrs, ...children) {
+    // console.log('elt called',)
     let dom = document.createElement(name);
     for (let attr of Object.keys(attrs)) {
         dom.setAttribute(attr, attrs[attr]);
     }
+
     for (let child of children) {
-        dom.appendChild(child);
+        if (typeof child === 'string' || typeof child === 'number') {
+            let childElem = document.createTextNode(child);
+            dom.appendChild(childElem);
+        }
+        else if (typeof child === 'object') {
+            dom.appendChild(child);
+        }
+
     }
     return dom;
 }
-// const scale = 20;
-
-
 function overlap(actor1, actor2) {
     return (
         actor1.pos.x + actor1.size.x > actor2.pos.x &&
@@ -31,11 +25,6 @@ function overlap(actor1, actor2) {
         actor1.pos.y < actor2.pos.y + actor2.size.y
     );
 }
-
-
-// const wobbleSpeed = 8,
-//     wobbleDist = 0.07;
-
 
 function trackKeys(keys) {
     let down = Object.create(null);

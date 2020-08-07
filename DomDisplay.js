@@ -22,9 +22,10 @@ class DOMDisplay {
         );
     }
     drawActors(actors) {
+        // console.log(actors.filter(actor => actor instanceof Coin).length);
         return elt(
             "div",
-            {},
+            { class: 'game-actors' },
             ...actors.map((actor) => {
                 let rect = elt("div", { class: `actor ${actor.type}` });
                 rect.style.width = `${actor.size.x * scale}px`;
@@ -32,13 +33,15 @@ class DOMDisplay {
                 rect.style.left = `${actor.pos.x * scale}px`;
                 rect.style.top = `${actor.pos.y * scale}px`;
                 return rect;
-            })
+            }), elt('p', { class: "score-tally" }, 'Coins Left: ' +
+                actors.filter(actor => actor instanceof Coin).length),
         );
     }
     clear() {
         this.dom.remove();
     }
     syncState(state) {
+        console.log(state);
         if (this.actorLayer) this.actorLayer.remove();
         this.actorLayer = this.drawActors(state.actors);
         this.dom.appendChild(this.actorLayer);

@@ -41,3 +41,11 @@
   max-height: 450px;
   position: relative;
 }
+
+.score-tally {
+  z-index: 100;
+  position: fixed;
+  top: 100px;
+  left: 45%;
+  white-space: nowrap;
+}
