@@ -1,10 +1,11 @@
 class Level {
-    constructor(plan) {
+    constructor(plan, lvl) {
         let newPlan = [...plan];
         this.height = newPlan.length;
         this.width = newPlan[0].length;
         this.startActors = [];
         this.numCoin = 0;
+        this.levelNum = lvl;
         this.rows = newPlan.map((row, y) => {
             return row.split('').map((ch, x) => {
                 let type = levelChars[ch];

@@ -18,7 +18,7 @@ class DOMDisplay {
                     { style: `height: ${scale}px` },
                     ...row.map((type) => elt("td", { class: type }))
                 )
-            )
+            ), elt('p', { class: "level-tally" }, 'Level: ' + (level.levelNum + 1)),
         );
     }
     drawActors(actors) {

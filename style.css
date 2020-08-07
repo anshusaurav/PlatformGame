@@ -6,7 +6,8 @@
   background-color: yellowgreen;
 }
 .background {
-  background: rgb(52, 166, 251);
+  background-image: url("./images/sprite_background__super_mario_bros__by_sonicx64ds_dcrz5nh-pre.jpg");
+  /* background: rgb(52, 166, 251); */
   table-layout: fixed;
   border-spacing: 0;
 }
@@ -17,7 +18,8 @@
   background: rgb(255, 100, 100);
 }
 .wall {
-  background: white;
+  background: rgb(80, 55, 19);
+  border
 }
 .actor {
   position: absolute;
@@ -45,7 +47,14 @@
 .score-tally {
   z-index: 100;
   position: fixed;
-  top: 100px;
-  left: 45%;
+  top: 80px;
+  left: 40%;
+  white-space: nowrap;
+}
+.level-tally {
+  z-index: 100;
+  position: fixed;
+  top: 80px;
+  left: 55%;
   white-space: nowrap;
 }
