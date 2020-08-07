@@ -130,4 +130,4 @@ async function runGame(plans, Display) {
     console.log("You've won!");
 }
 
-runGame(GAME_LEVELS, CanvasDisplay);
+runGame(GAME_LEVELS, DOMDisplay);
