@@ -1,14 +1,4 @@
 
-const levelChars = {
-    " ": "empty",
-    "x": "wall",
-    "!": "lava",
-    "@": Player,
-    o: Coin,
-    "=": Lava,
-    "|": Lava,
-    v: Lava,
-};
 
 function elt(name, attrs, ...children) {
     let dom = document.createElement(name);
@@ -85,7 +75,7 @@ function runLevel(level, Display) {
     });
 }
 async function runGame(plans, Display) {
-    for (let level = 1; level < plans.length;) {
+    for (let level = 0; level < plans.length;) {
         let status = await runLevel(new Level(plans[level], level),
             Display);
         if (status == "won") level++;

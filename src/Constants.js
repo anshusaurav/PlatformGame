@@ -1,7 +1,18 @@
 
+const levelChars = {
+    " ": "empty",
+    "x": "wall",
+    "!": "lava",
+    "@": Player,
+    o: Coin,
+    "=": Lava,
+    "|": Lava,
+    v: Lava,
+};
+
 const scale = 28;
 
-const coinSize = [0.6, 0.6];
+const coinSize = [0.75, 0.75];
 const coinPos = [0.2, 0.1];
 const wobbleSpeed = 8;
 const wobbleDist = 0.07;

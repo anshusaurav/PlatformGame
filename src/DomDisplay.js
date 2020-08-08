@@ -34,12 +34,17 @@ class DOMDisplay {
     }
 
     drawActors(actors) {
-        console.log('Scale:', scale);
+        // console.log('Scale:', scale);
         return elt(
             "div",
             {},
             ...actors.map((actor) => {
-                let rect = elt("div", { class: `actor ${actor.type}` });
+                // console.log(actor, actor.type === 'lava');
+                let rect;
+                if (actor.type === 'lava')
+                    rect = elt("div", { class: `actor ${actor.type} moving` });
+                else
+                    rect = elt("div", { class: `actor ${actor.type}` });
                 rect.style.width = `${actor.size.x * scale}px`;
                 rect.style.height = `${actor.size.y * scale}px`;
                 rect.style.left = `${actor.pos.x * scale}px`;

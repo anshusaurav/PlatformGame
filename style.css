@@ -8,6 +8,7 @@
 .background {
   background-image: url("./images/bg.jpg");
   background-size: contain;
+  background-repeat: repeat-x;
   table-layout: fixed;
   border-spacing: 0;
   border-radius: 1px;
@@ -17,6 +18,12 @@
 }
 .lava {
   background: rgba(247, 49, 49, 0.922);
+}
+.moving {
+  background-image: url("./images/fire.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
 }
 .wall {
   background: #381f13;
@@ -37,11 +44,13 @@
 }
 .coin:after {
   content: "$";
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: white;
   display: flex;
-  padding-top: 1px;
+  padding-top: 2px;
+  /* vertical-align: middle  ; */
+  text-align: center;
   justify-content: center;
   align-items: center;
 }
@@ -63,19 +72,23 @@
 .score-tally {
   z-index: 100;
   position: fixed;
-  top: 10px;
-  left: 30%;
+  top: 4px;
+  left: 25%;
   font-size: 24px;
   font-weight: 600;
   color: #ff7373;
   white-space: nowrap;
   font-family: "Raleway", sans-serif;
+  transition-property: border-color;
+  transition-duration: 0.9s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 1s;
 }
 .level-tally {
   z-index: 100;
   position: fixed;
-  top: 10px;
-  left: 60%;
+  top: 4px;
+  left: 70%;
   font-size: 24px;
   font-weight: 600;
   color: #ff7373;
