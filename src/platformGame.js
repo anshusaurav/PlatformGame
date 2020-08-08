@@ -73,7 +73,7 @@ function runLevel(level, Display) {
     });
 }
 async function runGame(plans, Display) {
-    for (let level = 3; level < plans.length;) {
+    for (let level = 0; level < plans.length;) {
         let status = await runLevel(new Level(plans[level], level),
             Display);
         if (status == "won") level++;

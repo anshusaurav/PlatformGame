@@ -30,10 +30,11 @@ class DOMDisplay {
                     { style: `height: ${scale}px` },
                     ...row.map((type, colIndex) => {
                         if (type === 'lava') {
-                            if (level.rows[rowIndex - 1][colIndex] === 'empty')
-                                return elt("td", {
-                                    class: `${type} topLava`
-                                })
+                            if (rowIndex - 1 >= 0)
+                                if (level.rows[rowIndex - 1][colIndex] === 'empty')
+                                    return elt("td", {
+                                        class: `${type} topLava`
+                                    })
                             if (rowIndex + 1 <= level.rows.length - 1) {
                                 if (level.rows[rowIndex + 1][colIndex] === 'empty') {
                                     return elt("td", {

@@ -27,12 +27,12 @@
 }
 .topLava {
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  background: #a14129;
+  background: #eb6b4b;
 }
 .botLava {
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   transform: rotate(180deg);
-  background: #b4482d;
+  background: #eb6b4b;
 }
 .wall {
   background: #381f13;
@@ -64,7 +64,7 @@
   align-items: center;
 }
 .player {
-  /* background: rgb(64, 64, 64); */
+  background: rgb(64, 64, 64);
   background-image: url("./images/mario.png");
   background-size: contain;
   background-position: center;
@@ -74,8 +74,32 @@
 .lost {
   background: rgb(160, 64, 64);
 }
+.lost:after {
+  content: "You loose";
+
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  padding-top: 2px;
+  /* vertical-align: middle  ; */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
 .won {
   box-shadow: -4px -7px 8px white, 4px -7px 8px white;
+  content: "You Won";
+
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  padding-top: 2px;
+  /* vertical-align: middle  ; */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 .game {
   overflow: hidden;
@@ -86,26 +110,35 @@
 .score-tally {
   z-index: 100;
   position: fixed;
-  top: 4px;
-  left: 25%;
+  top: 0;
+  left: 20.75%;
   font-size: 24px;
   font-weight: 600;
   color: #ff7373;
   white-space: nowrap;
-  font-family: "Raleway", sans-serif;
+  font-family: "Press Start 2P", cursive;
   transition-property: border-color;
   transition-duration: 0.9s;
   transition-timing-function: ease-in-out;
   transition-delay: 1s;
+  padding: 2px 16px;
+  padding-top: 4px;
+  border: 2px ridge #bc68dd;
+  border-radius: 1px;
+  /* box-sizing: border-box; */
 }
 .level-tally {
   z-index: 100;
   position: fixed;
-  top: 4px;
-  left: 70%;
+  top: 0;
+  left: 64.5%;
   font-size: 24px;
   font-weight: 600;
   color: #ff7373;
   white-space: nowrap;
-  font-family: "Raleway", sans-serif;
+  font-family: "Press Start 2P", cursive;
+  padding: 2px 16px;
+  padding-top: 4px;
+  border: 2px ridge #bc68dd;
+  border-radius: 1px;
 }
