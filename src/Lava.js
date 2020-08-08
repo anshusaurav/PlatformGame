@@ -12,7 +12,7 @@ class Lava {
 
     static create(pos, ch) {
         if (ch == "=") {
-            return new Lava(pos, new Vector2D(...horizontLavaSpeed));
+            return new Lava(pos, new Vector2D(...horizontalLavaSpeed));
         } else if (ch == "|") {
             return new Lava(pos, new Vector2D(...verticalLavaSpeed));
         } else if (ch == "v") {

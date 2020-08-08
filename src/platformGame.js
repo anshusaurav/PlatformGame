@@ -1,5 +1,3 @@
-
-
 function elt(name, attrs, ...children) {
     let dom = document.createElement(name);
     for (let attr of Object.keys(attrs)) {
@@ -73,10 +71,12 @@ function runLevel(level, Display) {
     });
 }
 async function runGame(plans, Display) {
-    for (let level = 0; level < plans.length;) {
-        let status = await runLevel(new Level(plans[level], level),
+    let lives = 3;
+    for (let level = 0; level < plans.length && lives > 0;) {
+        let status = await runLevel(new Level(plans[level], level, lives),
             Display);
         if (status == "won") level++;
+        // if (status == "lost") lives--;
     }
     console.log("You've won!");
 }

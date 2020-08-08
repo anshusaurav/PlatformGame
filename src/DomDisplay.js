@@ -17,7 +17,6 @@ class DOMDisplay {
     }
 
     drawGrid(level) {
-        console.log(level)
         return elt(
             "table",
             {
@@ -48,16 +47,15 @@ class DOMDisplay {
                     })
                 )
             ), elt('p', { class: "level-tally" }, 'Level: ' + (level.levelNum + 1)),
+            elt('p', { class: "lives-tally" }, 'Lives: ' + (level.lives))
         );
     }
 
     drawActors(actors) {
-        // console.log('Scale:', scale);
         return elt(
             "div",
             {},
             ...actors.map((actor) => {
-                // console.log(actor, actor.type === 'lava');
                 let rect;
                 if (actor.type === 'lava')
                     rect = elt("div", { class: `actor ${actor.type} moving` });
@@ -68,7 +66,7 @@ class DOMDisplay {
                 rect.style.left = `${actor.pos.x * scale}px`;
                 rect.style.top = `${actor.pos.y * scale}px`;
                 return rect;
-            }), elt('p', { class: "score-tally" }, 'Coins Left: ' +
+            }), elt('p', { class: "score-tally" }, 'Coins: ' +
                 actors.filter(actor => actor instanceof Coin).length)
         );
     }

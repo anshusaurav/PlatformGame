@@ -18,7 +18,7 @@ const wobbleSpeed = 8;
 const wobbleDist = 0.07;
 
 const lavaSize = [1, 1];
-const horizontLavaSpeed = [2, 0];
+const horizontalLavaSpeed = [2, 0];
 const verticalLavaSpeed = [0, 2];
 const drippingLavaSpeed = [0, 3];
 
