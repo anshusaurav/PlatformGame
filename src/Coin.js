@@ -3,7 +3,7 @@ class Coin {
         this.pos = pos;
         this.basePos = basePos;
         this.wobble = wobble;
-        this.size = new Vector2D(0.6, 0.6);
+        this.size = new Vector2D(...coinSize);
     }
 
     get type() {
@@ -11,12 +11,11 @@ class Coin {
     }
 
     static create(pos) {
-        let basePos = pos.plus(new Vector2D(0.2, 0.1));
+        let basePos = pos.plus(new Vector2D(...coinSize));
         return new Coin(basePos, basePos, Math.random() * Math.PI * 2);
     }
     collide(state) {
         let filtered = state.actors.filter((a) => a != this);
-
         let status = state.status;
         if (!filtered.some((a) => a.type == "coin")) status = "won";
         return new State(state.level, filtered, status);

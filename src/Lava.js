@@ -3,8 +3,7 @@ class Lava {
         this.pos = pos;
         this.speed = speed;
         this.reset = reset;
-        this.lavaType = '';
-        this.size = new Vector2D(1, 1);
+        this.size = new Vector2D(...lavaSize);
     }
 
     get type() {
@@ -13,11 +12,11 @@ class Lava {
 
     static create(pos, ch) {
         if (ch == "=") {
-            return new Lava(pos, new Vector2D(2, 0), undefined, "Still");
+            return new Lava(pos, new Vector2D(...horizontLavaSpeed));
         } else if (ch == "|") {
-            return new Lava(pos, new Vector2D(0, 2), undefined, "Moving");
+            return new Lava(pos, new Vector2D(...verticalLavaSpeed));
         } else if (ch == "v") {
-            return new Lava(pos, new Vector2D(0, 3), pos, "Moving");
+            return new Lava(pos, new Vector2D(...drippingLavaSpeed), pos);
         }
     }
     collide(state) {

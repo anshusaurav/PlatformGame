@@ -1,5 +1,16 @@
+
+const levelChars = {
+    " ": "empty",
+    "x": "wall",
+    "!": "lava",
+    "@": Player,
+    o: Coin,
+    "=": Lava,
+    "|": Lava,
+    v: Lava,
+};
+
 function elt(name, attrs, ...children) {
-    // console.log('elt called',)
     let dom = document.createElement(name);
     for (let attr of Object.keys(attrs)) {
         dom.setAttribute(attr, attrs[attr]);
@@ -10,7 +21,7 @@ function elt(name, attrs, ...children) {
             let childElem = document.createTextNode(child);
             dom.appendChild(childElem);
         }
-        else if (typeof child === 'object') {
+        else {
             dom.appendChild(child);
         }
 
@@ -25,7 +36,6 @@ function overlap(actor1, actor2) {
         actor1.pos.y < actor2.pos.y + actor2.size.y
     );
 }
-
 function trackKeys(keys) {
     let down = Object.create(null);
     function track(event) {
@@ -54,7 +64,6 @@ function runAnimation(frameFunc) {
     requestAnimationFrame(frame);
 }
 function runLevel(level, Display) {
-    console.log('Coins in this level: ', level.numCoin);
     let display = new Display(document.querySelector('.game-container'), level);
     let state = State.start(level);
     let ending = 1;
@@ -76,7 +85,7 @@ function runLevel(level, Display) {
     });
 }
 async function runGame(plans, Display) {
-    for (let level = 0; level < plans.length;) {
+    for (let level = 1; level < plans.length;) {
         let status = await runLevel(new Level(plans[level], level),
             Display);
         if (status == "won") level++;

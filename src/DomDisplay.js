@@ -4,6 +4,18 @@ class DOMDisplay {
         this.actorLayer = null;
         parent.appendChild(this.dom);
     }
+
+    clear() {
+        this.dom.remove();
+    }
+    syncState(state) {
+        if (this.actorLayer) this.actorLayer.remove();
+        this.actorLayer = this.drawActors(state.actors);
+        this.dom.appendChild(this.actorLayer);
+        this.dom.className = `game ${state.status}`;
+        this.scrollPlayerIntoView(state);
+    }
+
     drawGrid(level) {
         return elt(
             "table",
@@ -20,11 +32,12 @@ class DOMDisplay {
             ), elt('p', { class: "level-tally" }, 'Level: ' + (level.levelNum + 1)),
         );
     }
+
     drawActors(actors) {
-        // console.log(actors.filter(actor => actor instanceof Coin).length);
+        console.log('Scale:', scale);
         return elt(
             "div",
-            { class: 'game-actors' },
+            {},
             ...actors.map((actor) => {
                 let rect = elt("div", { class: `actor ${actor.type}` });
                 rect.style.width = `${actor.size.x * scale}px`;
@@ -33,24 +46,13 @@ class DOMDisplay {
                 rect.style.top = `${actor.pos.y * scale}px`;
                 return rect;
             }), elt('p', { class: "score-tally" }, 'Coins Left: ' +
-                actors.filter(actor => actor instanceof Coin).length),
+                actors.filter(actor => actor instanceof Coin).length)
         );
-    }
-    clear() {
-        this.dom.remove();
-    }
-    syncState(state) {
-        console.log(state);
-        if (this.actorLayer) this.actorLayer.remove();
-        this.actorLayer = this.drawActors(state.actors);
-        this.dom.appendChild(this.actorLayer);
-        this.dom.className = `game ${state.status}`;
-        this.scrollPlayerIntoView(state);
     }
     scrollPlayerIntoView(state) {
         let width = this.dom.clientWidth;
         let height = this.dom.clientHeight;
-        let margin = width / 3;
+        let margin = width / movePlayerOnPos;
 
         // The viewport
         let left = this.dom.scrollLeft,

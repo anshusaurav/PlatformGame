@@ -2,7 +2,7 @@ class Player {
     constructor(pos, speed) {
         this.pos = pos;
         this.speed = speed;
-        this.size = new Vector2D(0.5, 1.5);
+        this.size = new Vector2D(...playerSize);
     }
 
     get type() {
@@ -15,7 +15,9 @@ class Player {
 
     update(time, state, keys) {
         let xSpeed = 0;
-
+        const playerXSpeed = 7;
+        const gravity = 30;
+        const jumpSpeed = 17;
         if (keys.ArrowLeft) xSpeed -= playerXSpeed;
         if (keys.ArrowRight) xSpeed += playerXSpeed;
         let pos = this.pos;
