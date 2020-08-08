@@ -17,13 +17,22 @@
   padding: 0;
 }
 .lava {
-  background: rgba(247, 49, 49, 0.922);
+  background: #eb6b4b;
 }
 .moving {
   background-image: url("./images/fire.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
+}
+.topLava {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: #a14129;
+}
+.botLava {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transform: rotate(180deg);
+  background: #b4482d;
 }
 .wall {
   background: #381f13;
@@ -55,12 +64,17 @@
   align-items: center;
 }
 .player {
-  background: rgb(64, 64, 64);
+  /* background: rgb(64, 64, 64); */
+  background-image: url("./images/mario.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
 }
-.lost .player {
+.lost {
   background: rgb(160, 64, 64);
 }
-.won .player {
+.won {
   box-shadow: -4px -7px 8px white, 4px -7px 8px white;
 }
 .game {

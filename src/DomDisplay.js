@@ -17,17 +17,34 @@ class DOMDisplay {
     }
 
     drawGrid(level) {
+        console.log(level)
         return elt(
             "table",
             {
                 class: "background",
                 style: `width: ${level.width * scale}px`,
             },
-            ...level.rows.map((row) =>
+            ...level.rows.map((row, rowIndex) =>
                 elt(
                     "tr",
                     { style: `height: ${scale}px` },
-                    ...row.map((type) => elt("td", { class: type }))
+                    ...row.map((type, colIndex) => {
+                        if (type === 'lava') {
+                            if (level.rows[rowIndex - 1][colIndex] === 'empty')
+                                return elt("td", {
+                                    class: `${type} topLava`
+                                })
+                            if (rowIndex + 1 <= level.rows.length - 1) {
+                                if (level.rows[rowIndex + 1][colIndex] === 'empty') {
+                                    return elt("td", {
+                                        class: `${type} botLava`
+                                    })
+                                }
+                            }
+
+                        }
+                        return elt("td", { class: type })
+                    })
                 )
             ), elt('p', { class: "level-tally" }, 'Level: ' + (level.levelNum + 1)),
         );

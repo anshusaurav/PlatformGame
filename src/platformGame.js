@@ -5,7 +5,6 @@ function elt(name, attrs, ...children) {
     for (let attr of Object.keys(attrs)) {
         dom.setAttribute(attr, attrs[attr]);
     }
-
     for (let child of children) {
         if (typeof child === 'string' || typeof child === 'number') {
             let childElem = document.createTextNode(child);
@@ -14,7 +13,6 @@ function elt(name, attrs, ...children) {
         else {
             dom.appendChild(child);
         }
-
     }
     return dom;
 }
@@ -75,7 +73,7 @@ function runLevel(level, Display) {
     });
 }
 async function runGame(plans, Display) {
-    for (let level = 0; level < plans.length;) {
+    for (let level = 3; level < plans.length;) {
         let status = await runLevel(new Level(plans[level], level),
             Display);
         if (status == "won") level++;
