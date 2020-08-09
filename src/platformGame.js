@@ -71,14 +71,17 @@ function runLevel(level, Display) {
     });
 }
 async function runGame(plans, Display) {
-    let lives = 3;
-    for (let level = 0; level < plans.length && lives > 0;) {
-        let status = await runLevel(new Level(plans[level], level, lives),
-            Display);
-        if (status == "won") level++;
-        // if (status == "lost") lives--;
+    while (1) {
+        let lives = 3;
+        for (let level = 0; level < plans.length && lives > 0;) {
+            let status = await runLevel(new Level(plans[level], level, lives),
+                Display);
+            console.log(status);
+            if (status == "won") level++;
+            if (status == "lost") lives--;
+        }
+        console.log("You've won!");
     }
-    console.log("You've won!");
 }
 
 runGame(GAME_LEVELS, DOMDisplay);
