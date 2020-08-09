@@ -77,7 +77,7 @@ async function runGame(plans, Display) {
             let status = await runLevel(new Level(plans[level], level, lives),
                 Display);
             console.log(status);
-            if (status == "won") level++;
+            if (status == "won") { level++;, lives = 3; }
             if (status == "lost") lives--;
         }
         console.log("You've won!");
