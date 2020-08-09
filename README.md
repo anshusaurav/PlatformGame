@@ -25,8 +25,7 @@ Any advise for common problems or issues. Please contact anshu.saurav@gmail.com
 
 Contributors names and contact info
 
-ex. Anshu Saurabh
-ex. [@anshusaurav](https://twitter.com/anshusaurav)
+Anshu Saurabh [@anshusaurav](https://twitter.com/anshusaurav)
 
 ## Version History
 
