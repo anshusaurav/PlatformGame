@@ -1,4 +1,4 @@
-# Project Title
+# Platform Game
 
 Platform Game using Vanilla JavaScript.
 
