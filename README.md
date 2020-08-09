@@ -5,7 +5,6 @@ Platform Game using Vanilla JavaScript.
 ## Description
 
 Our game is roughly based on Dark Blue by Thomas Palef. I chose that game because it is both entertaining and minimalist and because it can be built without too much code.
-![GIF](https://imgur.com/rZ0Bnfs)
 
 ## Getting Started
 
